@@ -12,7 +12,7 @@ class Mineral:
         self.sistema_cristalino = sistema_cristalino
         self.specific_gravity = specific_gravity
         
-        
+    #comentario
     def silicato(self):
         respuesta = False
         compo = self.composicion
