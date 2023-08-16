@@ -1,7 +1,7 @@
 class Mineral:
     
     import matplotlib.pyplot as plt
-    import matplotlib.colors as mcolors
+
     
     def __init__(self, nombre, dureza, lustre, rompimiento_por_fractura, color, composicion, sistema_cristalino, specific_gravity):
         self.nombre = nombre
@@ -32,10 +32,36 @@ class Mineral:
     
     def color(self):
         col = self.color
+
+        fig, ax = plt.subplots()
+
+        recta = plt.Rectangle((0.1, 0.1), 0.4, 0.4, color=col)
+        ax.add_patch(recta)
+
+        # Configura los límites de los ejes y desactiva los ticks
+        ax.set_xlim(0, 0.6)
+        ax.set_ylim(0, 0.6)
+        ax.set_xticks([])
+        ax.set_yticks([])
+
+        # Muestra la figura
+        plt.show()
         
-        rgb_Color = mcolors.to_rgba(col)
-        color = mcolors.rgb2hex(rgba_color)
+    def info(self):
+        dureza = self.dureza
+        rompimiento = ""
+        if self.rompimiento_por_fractura:
+            rompimiento = "por fractura"
+        else:
+            rompimiento = "por escision"
+        sistema = self.sistema_cristalino
         
-        return color
+        print("El mineral tiene las siguientes caracteristicas: ")
+        print("Duerza: " + str(dureza))
+        print("Rompimiento: " + rompimiento)
+        print("Sistema de organizacion de los atomos " + str(sistema))
+
     
-    
+
+            
+            

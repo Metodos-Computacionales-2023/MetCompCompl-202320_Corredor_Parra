@@ -1,1 +1,0 @@
-awk -F "," 'NR>1{print $3}' Taller_1/indices_refraccion.csv > Taller_1/Materiales.txt
