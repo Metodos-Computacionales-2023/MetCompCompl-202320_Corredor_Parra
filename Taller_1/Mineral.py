@@ -35,12 +35,12 @@ class Mineral:
 
         fig, ax = plt.subplots()
 
-        recta = plt.Rectangle((0.1, 0.1), 0.4, 0.4, color=col)
+        recta = plt.Rectangle((0, 0), 1, 1, color=col)
         ax.add_patch(recta)
 
         # Configura los límites de los ejes y desactiva los ticks
-        ax.set_xlim(0, 0.6)
-        ax.set_ylim(0, 0.6)
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
         ax.set_xticks([])
         ax.set_yticks([])
 
