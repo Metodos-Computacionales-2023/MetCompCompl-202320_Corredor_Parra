@@ -1,3 +1,18 @@
-touch Taller_1/Materiales.txt
-awk -F "," 'NR>1{print $3}' Taller_1/indices_refraccion.csv > Taller_1/Materiales.txt
+
+while IFS=',' read -r categoria fabricante material enlace; do
+   
+    categoria=$(echo "$categoria" | xargs)
+    enlace=$(echo "$enlace" | xargs)
+
+    
+    if [ ! -d "$categoria" ]; then
+        mkdir "$categoria"
+    fi
+    
+
+    wget -P "$categoria" -O "$categoria/$material" "$enlace"
+done < indices_refraccion.csv
+
+
+
 
