@@ -34,24 +34,59 @@ def xml_to_tuples(ruta_archivo):
 def grafica(ruta_archivo):
 
    fuente= ruta_archivo.split("/")
-   material= fuente[2].split(".")[0]
-   carpeta= "Taller_1/"+fuente[1]
+   material= fuente[9].split(".")[0]
+   carpeta= "Taller_1/"+fuente[8]
    arreglo=xml_to_tuples(ruta_archivo)
    longitud_onda=arreglo[:,0]
    n=arreglo[:,1]
    n_promedio=np.mean(n)
    desviacion=np.std(n)
    
-   plt.scatter(longitud_onda, n)
+   plt.plot(longitud_onda, n)
    plt.xlabel('Longitud de onda λ')
    plt.ylabel('índice de refracción n')
-   plt.title('Índice de refracción vs longitud de onda para '+
-             material+ "con indice de refracción promedio de "+str(n_promedio)+
-             " y desviación estándar de "+str(desviacion))
+   plt.title('Índice de refracción vs longitud de onda\n para '+
+             material+ " con indice de refracción \n promedio de: "+str(n_promedio)+
+             " \n y desviación estándar de: "+str(desviacion))
    plt.grid(True)
+   
+   plt.savefig("C:/Users/Angie/OneDrive/Documentos/GitHub/MetCompCompl-202320_Corredor_Parra/"+carpeta + "/"+ material+ '.png')
    plt.show()
-   plt.savefig(carpeta + "/"+ material+ '.png')
 
    return
 
 
+import csv
+
+
+
+csv_file_path = "C:/Users/Angie/OneDrive/Documentos/GitHub/MetCompCompl-202320_Corredor_Parra/Taller_1/indices_refraccion.csv"
+
+with open(csv_file_path, "r") as csv_file:
+   
+    csv_reader = csv.reader(csv_file) 
+
+    for row in csv_reader:
+        
+        if row[1]!="Fabricante" :
+            
+     
+            categoria= row[0]
+            material= row[2]
+            
+            if categoria=="Materia InorgÃ¡nica":
+                categoria="Materia Inorgánica"
+                
+            elif categoria=="Materia OrgÃ¡nica":
+                categoria="Materia Orgánica"
+                
+            elif categoria=="PlÃ¡sticos Comerciales":
+                categoria="Plásticos Comerciales"
+                
+            elif categoria=="Adhesivos Ã“pticos":
+                categoria="Adhesivos Ópticos"
+            
+            ruta="C:/Users/Angie/OneDrive/Documentos/GitHub/MetCompCompl-202320_Corredor_Parra/Taller_1/"+ categoria+ "/"+material+".yml"
+            
+            grafica(ruta)
+            

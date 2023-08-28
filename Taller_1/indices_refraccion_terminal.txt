@@ -10,7 +10,7 @@ while IFS=',' read -r categoria fabricante material enlace; do
     fi
     
 
-    wget -P "$categoria" -O "$categoria/$material" "$enlace"
+    wget -P "$categoria" -O "$categoria/$material.yml" "$enlace"
 done < indices_refraccion.csv
 
 
