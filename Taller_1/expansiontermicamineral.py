@@ -47,7 +47,7 @@ class ExpansionTermicaMineral(Mineral):
     def coeficiente(self):
          
         alpha=[]
-        error=0
+        
 
         for i in range(len(self.temperaturas)):
             
@@ -72,6 +72,8 @@ class ExpansionTermicaMineral(Mineral):
         plt.title('Alpha vs Temperatura')
 
         plt.tight_layout()
+        
+        error=np.std(alpha)
 
         return (alpha[0], error, fig)
 
