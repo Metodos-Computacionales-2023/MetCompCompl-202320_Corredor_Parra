@@ -3,7 +3,7 @@ import csv
 import numpy as np
 import matplotlib.pyplot as plt
 
-from Taller_1.Mineral import Mineral
+from Mineral import Mineral
 
 class ExpansionTermicaMineral(Mineral):
 
@@ -35,7 +35,7 @@ class ExpansionTermicaMineral(Mineral):
 
      #extraido de las notas de clase
 
-    def DerivadaCentral(f,x,h):
+    def DerivadaCentral(self,f,x,h):
     
             d = 0.
             
@@ -50,8 +50,10 @@ class ExpansionTermicaMineral(Mineral):
         error=0
 
         for i in range(len(self.temperaturas)):
+            
+              derivada=((self.volumenes[i]+0.01)-(self.volumenes[i]-0.01))/(2*0.01) 
               
-              a= (1/self.volumenes[i])*self.DerivadaCentral(self.volumenes[i],self.temperaturas[i],0.01)             
+              a= (1/self.volumenes[i])* derivada           
               alpha.append(a)
 
         fig=plt.figure(figsize=(10, 6))
@@ -67,7 +69,7 @@ class ExpansionTermicaMineral(Mineral):
         plt.plot(self.temperaturas, alpha)
         plt.xlabel('Temperatura (K)')
         plt.ylabel('Alpha (1/K)')
-
+        plt.title('Alpha vs Temperatura')
 
         plt.tight_layout()
 
