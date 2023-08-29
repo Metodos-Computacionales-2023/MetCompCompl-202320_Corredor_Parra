@@ -26,9 +26,8 @@ class Mineral:
         dens = self.specific_gravity
         
         valor = dens*997
-        respuesta = "Su densidad es " + string(valor) + " Kg/m^3"
         
-        return respuesta
+        return valor
     
     def color(self):
         col = self.color

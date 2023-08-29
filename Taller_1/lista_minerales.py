@@ -18,4 +18,24 @@ with open("Taller_1/minerales.txt") as archivo:
         
     archivo.close()
 
+def num_silicatos(lista):
+
+    num = 0
+    
+    for mineral in lista:
+        if mineral.silicato():
+            num += 1
+    
+    return num
+
+def densidad_promedio(lista):
+    
+    suma = 0
+    
+    for mineral in lista:
+        suma += mineral.densidad()
+    
+    promedio = suma/len(lista)
+    
+    return promedio
 
