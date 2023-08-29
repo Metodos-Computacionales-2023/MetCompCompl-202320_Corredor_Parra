@@ -42,6 +42,7 @@ def grafica(ruta_archivo):
    n_promedio=np.mean(n)
    desviacion=np.std(n)
    
+   plt.figure(figsize=(10, 8))
    plt.plot(longitud_onda, n)
    plt.xlabel('Longitud de onda λ')
    plt.ylabel('índice de refracción n')
