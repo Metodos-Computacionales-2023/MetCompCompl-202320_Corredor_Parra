@@ -33,27 +33,34 @@ class ExpansionTermicaMineral(Mineral):
         self.volumenes = volumen_l
 
 
-     #extraido de las notas de clase
-
-    def DerivadaCentral(self,f,x,h):
-    
-            d = 0.
-            
-            if h != 0:
-                d = (f(x+h) - f(x-h))/(2*h)
-                
-            return d           
+          
 
     def coeficiente(self):
          
         alpha=[]
+        t=np.array(self.temperaturas)
+        v=np.array(self.volumenes)
+        dv= np.diff(v)
+        dt= np.diff(t)
+        dvdt= dv/dt
         
+        derivada= np.empty_like(t,dtype=float)
+        derivada[0]=(v[1]-v[0])/(t[1]-t[0])
+        derivada[-1]=(v[-1]-v[-2])/(t[-1]-t[-2])
+        derivada[1:-1]=(dvdt[:-1]+dvdt[1:])/2
+        
+        h1=0.001
+        h2=0.01
+        dvdt1= np.gradient(v,h1)
+        dvdt2=np.gradient(v,h2)
+        abserr=np.abs(dvdt1-dvdt2)
+        error=np.mean(abserr)
+   
 
         for i in range(len(self.temperaturas)):
             
-              derivada=((self.volumenes[i]+0.01)-(self.volumenes[i]-0.01))/(2*0.01) 
               
-              a= (1/self.volumenes[i])* derivada           
+              a= (1/self.volumenes[i])* derivada[i]         
               alpha.append(a)
 
         fig=plt.figure(figsize=(10, 6))
@@ -73,9 +80,6 @@ class ExpansionTermicaMineral(Mineral):
 
         plt.tight_layout()
         
-        error=np.std(alpha)
+      
 
         return (alpha[0], error, fig)
-
-
-        
